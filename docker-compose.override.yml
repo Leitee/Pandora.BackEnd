@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  pandora.backend.data:
+    ports:
+      - "80"
+  pandora.backend.api:
+    ports:
+      - "80"
+networks:
+  default:
+    external:
+      name: nat
+

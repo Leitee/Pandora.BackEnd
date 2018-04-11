@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  pandora.backend.data:
+    image: pandora.backend.data
+    build:
+      context: .\Pandora.BackEnd.Data
+      dockerfile: Dockerfile
+
+  pandora.backend.api:
+    image: pandorabackendapi
+    build:
+      context: .\Pandora.BackEnd.Api
+      dockerfile: Dockerfile
+
