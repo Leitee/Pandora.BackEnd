@@ -5,13 +5,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace Pandora.BackEnd.Model.AppDomain
+namespace Pandora.BackEnd.Model.AppEntity
 {
-    [Table("Users")]
     public class AppUser: IdentityUser
     {
-        public ICollection<AppUserRole> UserRoles { get; set; }
-
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<AppUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType

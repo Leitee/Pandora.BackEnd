@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Pandora.BackEnd.Model.AppDomain
+namespace Pandora.BackEnd.Model.AppEntity
 {
     public class AppRole : IdentityRole
     {

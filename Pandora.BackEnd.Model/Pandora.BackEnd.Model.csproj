@@ -56,9 +56,8 @@
   <ItemGroup>
     <Compile Include="Enums.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="AppDomain\AppRole.cs" />
-    <Compile Include="AppDomain\AppUser.cs" />
-    <Compile Include="AppDomain\AppRoleUser.cs" />
+    <Compile Include="AppEntity\AppRole.cs" />
+    <Compile Include="AppEntity\AppUser.cs" />
     <Compile Include="Users\Employee.cs" />
   </ItemGroup>
   <ItemGroup>

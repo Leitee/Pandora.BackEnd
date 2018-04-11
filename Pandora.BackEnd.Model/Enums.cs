@@ -5,10 +5,10 @@ namespace Pandora.BackEnd.Model
     public enum GenderEnum
     {
         [Description("Man")]
-        MAN,
+        MAN = 1,
         [Description("Woman")]
-        WOMAN,
+        WOMAN = 2,
         [Description("Other")]
-        OTHER
+        OTHER = 3
     }
 }

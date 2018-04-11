@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
 using Pandora.BackEnd.Data.Contracts;
-using Pandora.BackEnd.Model.AppDomain;
+using Pandora.BackEnd.Model.AppEntity;
 using Pandora.BackEnd.Model.Users;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
@@ -26,6 +26,15 @@ namespace Pandora.BackEnd.Data.Concrets
         {            
             base.OnModelCreating(modelBuilder);
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+
+            //Rename Identity tables
+            modelBuilder.Entity<IdentityUser>().ToTable("Users");
+            modelBuilder.Entity<IdentityRole>().ToTable("Roles");
+            modelBuilder.Entity<IdentityUserRole>().ToTable("UserRole");
+            modelBuilder.Entity<IdentityUserClaim>().ToTable("UserClaim");
+            modelBuilder.Entity<IdentityUserLogin>().ToTable("UserLogin");
+            modelBuilder.Entity<AppUser>().ToTable("Users");
+            modelBuilder.Entity<AppRole>().ToTable("Roles");
         }
     }
 }

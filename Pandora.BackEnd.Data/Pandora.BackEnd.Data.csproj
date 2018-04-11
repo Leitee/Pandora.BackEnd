@@ -84,14 +84,15 @@
     <Compile Include="Contracts\IApplicationDbContext.cs" />
     <Compile Include="Contracts\IApplicationUow.cs" />
     <Compile Include="Contracts\IRepository.cs" />
-    <Compile Include="Helpers\HelperEntity.cs" />
+    <Compile Include="Helpers\ContextHelper.cs" />
+    <Compile Include="Helpers\EntityHelper.cs" />
     <Compile Include="Contracts\IRepositoryProvider.cs" />
     <Compile Include="Helpers\PagedResult.cs" />
     <Compile Include="Helpers\RepositoryFactories.cs" />
     <Compile Include="Concrets\RepositoryProvider.cs" />
-    <Compile Include="Migrations\201804110254402_InitialMigration.cs" />
-    <Compile Include="Migrations\201804110254402_InitialMigration.Designer.cs">
-      <DependentUpon>201804110254402_InitialMigration.cs</DependentUpon>
+    <Compile Include="Migrations\201804111750216_InitialMigration.cs" />
+    <Compile Include="Migrations\201804111750216_InitialMigration.Designer.cs">
+      <DependentUpon>201804111750216_InitialMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -107,8 +108,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201804110254402_InitialMigration.resx">
-      <DependentUpon>201804110254402_InitialMigration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201804111750216_InitialMigration.resx">
+      <DependentUpon>201804111750216_InitialMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 
 namespace ATPSistema.Data.Helpers
 {
-    public static class HelperEntity
+    public static class EntityHelper
     {
         public static IQueryable<TEntity> IncludeMultiple<TEntity>(this IQueryable<TEntity> query,
             params Expression<Func<TEntity, object>>[] includes) where TEntity : class

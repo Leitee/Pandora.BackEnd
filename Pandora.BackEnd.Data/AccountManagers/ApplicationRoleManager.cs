@@ -3,7 +3,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Pandora.BackEnd.Data.Concrets;
-using Pandora.BackEnd.Model.AppDomain;
+using Pandora.BackEnd.Model.AppEntity;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
@@ -37,18 +37,6 @@ namespace Pandora.BackEnd.Data.Infraestructure
         {
             var idResult = _userManager.AddToRole(userId, roleName);
             return idResult.Succeeded;
-        }
-
-        public static void ClearUserRoles(ApplicationUserManager userManager, string userId)
-        {
-            var user = userManager.FindById(userId);
-            var currentRoles = new List<AppUserRole>();
-
-            currentRoles.AddRange(user.UserRoles);
-            foreach (AppUserRole role in currentRoles)
-            {
-                userManager.RemoveFromRole(userId, role.ApplicationRole.Name);
-            }
         }
 
         public static void RemoveFromRole(ApplicationUserManager userManager, string userId, string roleName)

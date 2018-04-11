@@ -1,4 +1,4 @@
-﻿using Pandora.BackEnd.Model.AppDomain;
+﻿using Pandora.BackEnd.Model.AppEntity;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
