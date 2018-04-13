@@ -2,8 +2,6 @@
 using System.Data.SqlClient;
 using System.Web;
 using System.Web.Http;
-using System.Web.Mvc;
-using System.Web.Routing;
 
 namespace Pandora.BackEnd.Api
 {
@@ -15,12 +13,9 @@ namespace Pandora.BackEnd.Api
         string connString = ConfigurationManager.ConnectionStrings["ReleaseConnection"].ConnectionString;
 #endif
 
-
         protected void Application_Start()
         {
             GlobalConfiguration.Configure(WebApiConfig.Register);
-            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
-            RouteConfig.RegisterRoutes(RouteTable.Routes);
 
             //Start SQL Dependency
             SqlDependency.Start(connString);
