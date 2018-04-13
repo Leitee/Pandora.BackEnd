@@ -3,7 +3,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace ATPSistema.Data.Helpers
+namespace Pandora.BackEnd.Data.Helpers
 {
     public static class EntityHelper
     {

@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 
-namespace Pandora.BackEnd.Data.Infraestructure
+namespace Pandora.BackEnd.Data.AccountManager
 {
     public class ApplicationRoleManager : RoleManager<AppRole>
     {

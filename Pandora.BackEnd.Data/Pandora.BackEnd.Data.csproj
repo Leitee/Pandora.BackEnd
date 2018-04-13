@@ -75,15 +75,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AccountManagers\ApplicationRoleManager.cs" />
-    <Compile Include="AccountManagers\ApplicationSignInManager.cs" />
-    <Compile Include="AccountManagers\ApplicationUserManager.cs" />
+    <Compile Include="AccountManager\ApplicationRoleManager.cs" />
+    <Compile Include="AccountManager\ApplicationSignInManager.cs" />
+    <Compile Include="AccountManager\ApplicationUserManager.cs" />
     <Compile Include="Concrets\ApplicationDbContext.cs" />
     <Compile Include="Concrets\ApplicationUow.cs" />
     <Compile Include="Concrets\EFRepository.cs" />
+    <Compile Include="Concrets\AuthRepository.cs" />
+    <Compile Include="Concrets\RolRepository.cs" />
     <Compile Include="Contracts\IApplicationDbContext.cs" />
     <Compile Include="Contracts\IApplicationUow.cs" />
     <Compile Include="Contracts\IRepository.cs" />
+    <Compile Include="Contracts\IRolRepository.cs" />
+    <Compile Include="Contracts\IAuthRepository.cs" />
     <Compile Include="Helpers\ContextHelper.cs" />
     <Compile Include="Helpers\EntityHelper.cs" />
     <Compile Include="Contracts\IRepositoryProvider.cs" />

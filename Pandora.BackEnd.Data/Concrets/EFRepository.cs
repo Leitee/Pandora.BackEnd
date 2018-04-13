@@ -1,5 +1,4 @@
-﻿using ATPSistema.Data.Helpers;
-using Pandora.BackEnd.Data.Contracts;
+﻿using Pandora.BackEnd.Data.Contracts;
 using Pandora.BackEnd.Data.Helpers;
 using System;
 using System.Collections.Generic;

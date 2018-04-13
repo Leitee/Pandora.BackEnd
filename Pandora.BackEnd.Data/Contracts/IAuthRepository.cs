@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNet.Identity;
-using Pandora.BackEnd.Model.AppDomain;
+using Pandora.BackEnd.Model.AppEntity;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Pandora.BackEnd.Data.Contracts
 {
-    public interface IUserRepository : IRepository<AppUser>
+    public interface IAuthRepository : IRepository<AppUser>
     {
         Task<List<AppUser>> GeAllUsersAsync();
 
@@ -25,11 +25,11 @@ namespace Pandora.BackEnd.Data.Contracts
 
         Task<IdentityResult> RegisterUserAsync(string userName, string email, string password);
 
-        Task<IdentityResult> AddToAppRoleesAsync(string userId, params string[] AppRolees);
+        Task<IdentityResult> AddToRolesAsync(string userId, params string[] AppRolees);
 
-        Task<IdentityResult> RemoveAppRoleesAsync(string userId, params string[] AppRolees);
+        Task<IdentityResult> RemoveRolesAsync(string userId, params string[] AppRolees);
 
-        Task<IList<string>> GetAppRoleesByUserIdAsync(string userId);
+        Task<IList<string>> GetRolesByUserIdAsync(string userId);
 
         Task<IdentityResult> AddLoginAsync(string userId, UserLoginInfo login);
 

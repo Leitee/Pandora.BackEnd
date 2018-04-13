@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security.DataProtection;
+using Pandora.BackEnd.Data.AccountManager;
 using Pandora.BackEnd.Data.Contracts;
-using Pandora.BackEnd.Data.Infraestructure;
-using Pandora.BackEnd.Model.AppDomain;
+using Pandora.BackEnd.Model.AppEntity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Pandora.BackEnd.Data.Concrets
 {
-    public class AuthRepository : EFRepository<AppUser>, IUserRepository
+    public class AuthRepository : EFRepository<AppUser>, IAuthRepository
     {
         private readonly IApplicationDbContext _currentContext;
 
@@ -74,14 +76,12 @@ namespace Pandora.BackEnd.Data.Concrets
             return user;
         }
 
-
         public async Task<IdentityResult> CreateUserAsync(AppUser user, string password)
         {
             var response = new IdentityResult();
 
             try
             {
-                user.Rol = null;
                 response = await this._userManager.CreateAsync(user, password);
 
                 if (!response.Succeeded)
@@ -99,7 +99,7 @@ namespace Pandora.BackEnd.Data.Concrets
 
         public async Task<IdentityResult> RegisterUserAsync(string userName, string email, string password)
         {
-            var response = new IdentityResultResponse();
+            var response = new IdentityResult();
 
             AppUser user = new AppUser
             {
@@ -107,11 +107,9 @@ namespace Pandora.BackEnd.Data.Concrets
                 Email = email
             };
 
-            response.Result = await this._userManager.CreateAsync(user, password);
+            response = await this._userManager.CreateAsync(user, password);
 
-            ApplicationRoleManager.AddUserToRole(this._userManager, user.Id, "Cliente");
-
-            response.User = user;
+            ApplicationRoleManager.AddUserToRole(this._userManager, user.Id, "User");
 
             return response;
         }
@@ -123,7 +121,6 @@ namespace Pandora.BackEnd.Data.Concrets
             try
             {
                 var userEdit = this._userManager.FindById(user.Id);
-                userEdit.EmpleadoId = user.EmpleadoId;
 
                 response = await this._userManager.UpdateAsync(userEdit);
             }
@@ -323,12 +320,6 @@ namespace Pandora.BackEnd.Data.Concrets
             return result;
         }
 
-        public void Dispose()
-        {
-            //_ctx.Dispose();
-            this._userManager.Dispose();
-        }
-
         async Task<IdentityResult> IAuthRepository.CreateUserAsync(AppUser user)
         {
             var response = new IdentityResult();
@@ -344,7 +335,6 @@ namespace Pandora.BackEnd.Data.Concrets
 
             return response;
         }
-
 
         async Task<IdentityResult> IAuthRepository.RemoveRolesAsync(string userId, params string[] roles)
         {
@@ -398,6 +388,12 @@ namespace Pandora.BackEnd.Data.Concrets
             {
                 throw new Exception(ex.Message, ex.InnerException);
             }
+        }
+
+        public void Dispose()
+        {
+            //_ctx.Dispose();
+            this._userManager.Dispose();
         }
     }
 }

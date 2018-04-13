@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNet.Identity;
-using Pandora.BackEnd.Model.AppDomain;
+using Pandora.BackEnd.Model.AppEntity;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

@@ -5,7 +5,7 @@ using Pandora.BackEnd.Model.AppEntity;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace Pandora.BackEnd.Data.Infraestructure
+namespace Pandora.BackEnd.Data.AccountManager
 {
     public class ApplicationSignInManager : SignInManager<AppUser, string>
     {

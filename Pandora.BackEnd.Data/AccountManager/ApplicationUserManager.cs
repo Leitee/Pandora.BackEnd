@@ -6,7 +6,7 @@ using Pandora.BackEnd.Data.Concrets;
 using Pandora.BackEnd.Model.AppEntity;
 using System;
 
-namespace Pandora.BackEnd.Data.Infraestructure
+namespace Pandora.BackEnd.Data.AccountManager
 {
     public class ApplicationUserManager : UserManager<AppUser>
     {
@@ -41,14 +41,14 @@ namespace Pandora.BackEnd.Data.Infraestructure
 
             // Register two factor authentication providers. This application uses Phone and Emails as a step of receiving a code for verifying the user
             // You can write your own provider and plug it in here.
-            manager.RegisterTwoFactorProvider("Código por Teléfono", new PhoneNumberTokenProvider<AppUser>
+            manager.RegisterTwoFactorProvider("Security Code by Phone", new PhoneNumberTokenProvider<AppUser>
             {
-                MessageFormat = "Tu Código de Seguridad es {0}"
+                MessageFormat = "Your security code is {0}"
             });
-            manager.RegisterTwoFactorProvider("Código por Correo Electrónico", new EmailTokenProvider<AppUser>
+            manager.RegisterTwoFactorProvider("Security Code by Email", new EmailTokenProvider<AppUser>
             {
-                Subject = "Código de Seguridad",
-                BodyFormat = "Tu Código de Seguridad es {0}"
+                Subject = "Security Code",
+                BodyFormat = "Your security code is {0}"
             });
             //manager.EmailService = new EmailService();
             //manager.SmsService = new SmsService();

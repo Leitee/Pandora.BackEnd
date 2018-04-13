@@ -8,8 +8,9 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
-using Pandora.BackEnd.Api.Providers;
-using Pandora.BackEnd.Api.Models;
+using Pandora.BackEnd.Bussines.Providers;
+using Pandora.BackEnd.Data.AccountManager;
+using Pandora.BackEnd.Data.Concrets;
 
 namespace Pandora.BackEnd.Api
 {
@@ -36,7 +37,7 @@ namespace Pandora.BackEnd.Api
             OAuthOptions = new OAuthAuthorizationServerOptions
             {
                 TokenEndpointPath = new PathString("/Token"),
-                Provider = new ApplicationOAuthProvider(PublicClientId),
+                Provider = new CustomOAuthProvider(),
                 AuthorizeEndpointPath = new PathString("/api/Account/ExternalLogin"),
                 AccessTokenExpireTimeSpan = TimeSpan.FromDays(14),
                 // In production mode set AllowInsecureHttp = false

@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Pandora.BackEnd.Data.AccountManager;
 using Pandora.BackEnd.Data.Contracts;
-using Pandora.BackEnd.Model.AppDomain;
+using Pandora.BackEnd.Model.AppEntity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,29 +10,29 @@ using System.Threading.Tasks;
 
 namespace Pandora.BackEnd.Data.Concrets
 {
-    public class RolRepository : EFRepository<Role>, IRolRepository
+    public class RolRepository : EFRepository<AppRole>, IRolRepository
     {
         private readonly IApplicationDbContext _context;
 
-        private readonly RoleStore<Role> _roleStore;
+        private readonly RoleStore<AppRole> _roleStore;
         private readonly ApplicationRoleManager _roleManager;
 
         public RolRepository(IApplicationDbContext context)
             : base(context)
         {
             _context = context;
-            this._roleStore = new RoleStore<Role>(_context as ApplicationDbContext);
+            this._roleStore = new RoleStore<AppRole>(_context as ApplicationDbContext);
             this._roleManager = new ApplicationRoleManager(this._roleStore);
         }
 
-        public async Task<List<Role>> GeAllRolesAsync()
+        public async Task<List<AppRole>> GeAllRolesAsync()
         {
             return await Task.Run(() => {
                 return this._roleManager.Roles.ToList();
             });
         }
 
-        public async Task<Role> GetRoleById(string roleId)
+        public async Task<AppRole> GetRoleById(string roleId)
         {
             try
             {
@@ -43,7 +44,7 @@ namespace Pandora.BackEnd.Data.Concrets
             }
         }
 
-        public async Task<IdentityResult> CreateRoleAsync(Role role)
+        public async Task<IdentityResult> CreateRoleAsync(AppRole role)
         {
             var response = new IdentityResult();
 
@@ -59,7 +60,7 @@ namespace Pandora.BackEnd.Data.Concrets
             return response;
         }
 
-        public async Task<IdentityResult> EditRoleAsync(Role role)
+        public async Task<IdentityResult> EditRoleAsync(AppRole role)
         {
             var response = new IdentityResult();
 
@@ -95,7 +96,7 @@ namespace Pandora.BackEnd.Data.Concrets
             return response;
         }
 
-        public async Task<Role> GetRoleByName(string roleName)
+        public async Task<AppRole> GetRoleByName(string roleName)
         {
             try
             {
