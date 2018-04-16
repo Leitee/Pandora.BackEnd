@@ -19,10 +19,6 @@ namespace Pandora.BackEnd.Api.Controllers
             }
         }
 
-        public BaseApiController()
-        {
-        }
-
         //protected ModelFactory TheModelFactory
         //{
         //    get

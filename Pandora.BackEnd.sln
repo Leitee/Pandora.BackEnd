@@ -17,8 +17,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pandora.BackEnd.Api", "Pand
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pandora.BackEnd.Tests", "Pandora.BackEnd.Tests\Pandora.BackEnd.Tests.csproj", "{59779D8C-C586-482B-A342-6FC8D686C34F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "api", "..\api\api.csproj", "{7DBCB778-BEA9-43B1-81FB-9C9B3AEE2A37}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,10 +51,6 @@ Global
 		{59779D8C-C586-482B-A342-6FC8D686C34F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{59779D8C-C586-482B-A342-6FC8D686C34F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{59779D8C-C586-482B-A342-6FC8D686C34F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7DBCB778-BEA9-43B1-81FB-9C9B3AEE2A37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7DBCB778-BEA9-43B1-81FB-9C9B3AEE2A37}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7DBCB778-BEA9-43B1-81FB-9C9B3AEE2A37}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7DBCB778-BEA9-43B1-81FB-9C9B3AEE2A37}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

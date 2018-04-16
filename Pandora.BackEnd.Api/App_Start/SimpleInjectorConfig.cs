@@ -13,7 +13,6 @@ namespace ATPSistema.Api.App_Start
     public static class SimpleInjectorConfig
     {
         public static SimpleInjectorWebApiDependencyResolver Register(Container container)
-
         {
             // Create the container as usual.
             if (container == null)
@@ -25,8 +24,8 @@ namespace ATPSistema.Api.App_Start
 
             container.Register<IRepositoryProvider,RepositoryProvider>(Lifestyle.Scoped);
 
-            //container.Register<IAuthRepository, AuthRepository>();
-            //container.Register<IRolRepository, RolRepository>();
+            container.Register<IAuthRepository, AuthRepository>();
+            container.Register<IRolRepository, RolRepository>();
 
 
             // Register your types, for instance using the scoped lifestyle:

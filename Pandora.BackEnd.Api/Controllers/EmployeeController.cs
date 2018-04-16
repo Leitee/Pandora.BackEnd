@@ -4,17 +4,18 @@ using System.Web.Http;
 
 namespace Pandora.BackEnd.Api.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [RoutePrefix("api/employee")]
-    public class EmpleadoController : BaseApiController
+    public class EmployeeController : BaseApiController
     {
         private readonly IEmployeeSVC employeeSvc;        
 
-        public EmpleadoController(IEmployeeSVC _employeeSvc)
+        public EmployeeController(IEmployeeSVC _employeeSvc)
         {
             employeeSvc = _employeeSvc;            
         }
 
+        [Route("emp")]
         public async Task<IHttpActionResult> Get()
         {
             var response = await employeeSvc.GetAllAsync();
