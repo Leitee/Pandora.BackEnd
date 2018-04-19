@@ -20,21 +20,17 @@ namespace ATPSistema.Api.App_Start
 
             container.Options.DefaultScopedLifestyle = new AsyncScopedLifestyle();// new WebApiRequestLifestyle();
 
-            container.Register<RepositoryFactories, RepositoryFactories>(Lifestyle.Singleton);
-
-            container.Register<IRepositoryProvider,RepositoryProvider>(Lifestyle.Scoped);
-
-            container.Register<IAuthRepository, AuthRepository>();
-            container.Register<IRolRepository, RolRepository>();
-
-
             // Register your types, for instance using the scoped lifestyle:
-            //Unit of Work
-            container.Register<IApplicationUow, ApplicationUow>(Lifestyle.Scoped);
-            container.Register<IApplicationDbContext, ApplicationDbContext>(Lifestyle.Scoped);
 
             //Repository
-            //container.Register<IRepository, EFRepository>(Lifestyle.Scoped);
+            container.Register<IRepositoryProvider, RepositoryProvider>(Lifestyle.Scoped);
+            container.Register<IAuthRepository, AuthRepository>(Lifestyle.Scoped);
+            container.Register<IRolRepository, RolRepository>(Lifestyle.Scoped);
+            container.Register<RepositoryFactories, RepositoryFactories>(Lifestyle.Singleton);
+
+            //Unit of Work
+            container.Register<IApplicationUow, ApplicationUow>(Lifestyle.Scoped);
+            container.Register<IApplicationDbContext, ApplicationDbContext>(Lifestyle.Scoped);            
 
             //Bussines Services
             container.Register<IEmployeeSVC, EmployeeSVC>();
@@ -42,7 +38,6 @@ namespace ATPSistema.Api.App_Start
 
             // This is an extension method from the integration package.
             container.RegisterWebApiControllers(GlobalConfiguration.Configuration);
-
             container.Verify();
 
             return new SimpleInjectorWebApiDependencyResolver(container);

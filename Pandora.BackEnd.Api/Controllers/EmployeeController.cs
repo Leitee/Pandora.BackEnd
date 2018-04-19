@@ -15,7 +15,6 @@ namespace Pandora.BackEnd.Api.Controllers
             employeeSvc = _employeeSvc;            
         }
 
-        [Route("emp")]
         public async Task<IHttpActionResult> Get()
         {
             var response = await employeeSvc.GetAllAsync();
