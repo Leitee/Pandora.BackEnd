@@ -230,6 +230,10 @@
       <Project>{CA00F9A6-6D11-4ABF-8452-DC32F048A5BE}</Project>
       <Name>Pandora.BackEnd.Model</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Pandora.BackEnd.Reports\Pandora.BackEnd.Reports.csproj">
+      <Project>{03D9144D-2D0A-4C39-B6C8-EBD7CA108E64}</Project>
+      <Name>Pandora.BackEnd.Reports</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

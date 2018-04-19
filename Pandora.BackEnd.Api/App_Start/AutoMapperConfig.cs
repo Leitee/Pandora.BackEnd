@@ -1,4 +1,5 @@
-﻿using Pandora.BackEnd.Business.DTOs;
+﻿using Pandora.BackEnd.Business.DTO;
+using Pandora.BackEnd.Business.DRO;
 
 namespace ATPSistema.Api.App_Start
 {
@@ -7,6 +8,7 @@ namespace ATPSistema.Api.App_Start
         public static void RegisterMappings()
         {
             DTOConfig.Execute();
+            DROConfig.Execute();
         }
     }
 }

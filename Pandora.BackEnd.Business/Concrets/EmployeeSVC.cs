@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Pandora.BackEnd.Business.Contracts;
-using Pandora.BackEnd.Business.DTOs;
+using Pandora.BackEnd.Business.DTO;
 using Pandora.BackEnd.Business.Filters;
 using Pandora.BackEnd.Data.Contracts;
 using Pandora.BackEnd.Model.Users;

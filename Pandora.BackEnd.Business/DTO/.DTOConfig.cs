@@ -2,7 +2,7 @@
 using Pandora.BackEnd.Common.Helpers;
 using Pandora.BackEnd.Model.Users;
 
-namespace Pandora.BackEnd.Business.DTOs
+namespace Pandora.BackEnd.Business.DTO
 {
     public class DTOConfig
     {

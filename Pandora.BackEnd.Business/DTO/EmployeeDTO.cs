@@ -1,4 +1,4 @@
-﻿namespace Pandora.BackEnd.Business.DTOs
+﻿namespace Pandora.BackEnd.Business.DTO
 {
     public class EmployeeDTO
     {

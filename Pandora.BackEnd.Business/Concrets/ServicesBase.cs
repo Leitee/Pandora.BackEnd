@@ -10,7 +10,7 @@ namespace Pandora.BackEnd.Business.Concrets
         protected void HandleSVCException<T>(ref BLResponse<T> pResponse, Exception pEx)
         {
             pResponse.HasErrors = true;
-            pResponse.Errors.Add("Error at Service");
+            pResponse.Errors.Add("Error at Business Service");
             pResponse.Errors.Add(pEx.Message);
             if (pEx.InnerException != null)
                 pResponse.Errors.Add(pEx.InnerException.Message);

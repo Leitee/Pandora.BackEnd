@@ -94,20 +94,22 @@
     <Compile Include="Concrets\EmployeeSVC.cs" />
     <Compile Include="Concrets\ServicesBase.cs" />
     <Compile Include="Contracts\IEmployeeSVC.cs" />
-    <Compile Include="DTOs\EmployeeDTO.cs" />
+    <Compile Include="DRO\.DTOConfig.cs" />
+    <Compile Include="DTO\EmployeeDTO.cs" />
     <Compile Include="Filters\.PagedFilter.cs" />
     <Compile Include="Filters\EmployeeFilter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\CustomJwtFormat.cs" />
     <Compile Include="Providers\CustomOAuthProvider.cs" />
     <Compile Include="Providers\TokenRefreshProvider.cs" />
+    <Compile Include="DRO\EmployeeDRO.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DTOs\.DTOConfig.cs" />
+    <Compile Include="DTO\.DTOConfig.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Pandora.BackEnd.Common\Pandora.BackEnd.Common.csproj">
@@ -123,6 +125,8 @@
       <Name>Pandora.BackEnd.Model</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
