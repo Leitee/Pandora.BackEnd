@@ -2,10 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.Hosting;
 
 namespace Pandora.BackEnd.Reports
@@ -32,6 +28,7 @@ namespace Pandora.BackEnd.Reports
             _fileName = pFileName;
             _dataSourceName = pDataSourceName;
             _reportData = pReportData;
+            _deviceInfo = pDeviceInfo;
         }
 
         /// <summary>
@@ -47,13 +44,14 @@ namespace Pandora.BackEnd.Reports
             _fileName = pFileName;
             _dataSourceName = pDataSourceName;
             _reportData = pReportData;
+            _reportData = pReportData;
             _reportParams = pReportParams;
         }
 
         public byte[] Create()
         {
-                var lr = new LocalReport();
-                string path = string.Empty;
+            var lr = new LocalReport();
+            string path = string.Empty;
 
             try
             {
@@ -71,7 +69,7 @@ namespace Pandora.BackEnd.Reports
 
 
                 //add parameters
-                if(_reportParams != null && _reportParams.Count > 0)
+                if (_reportParams != null && _reportParams.Count > 0)
                     lr.SetParameters(_reportParams);
 
                 //Render the report    
@@ -86,17 +84,17 @@ namespace Pandora.BackEnd.Reports
             }
         }
 
-        public static string GetDeviceInfoXML()
+        public static string GetDeviceInfoXML(string pOutputFormat = "Pdf", float pPageWith = 8.5f,
+            float pPageHeight = 11f, float pMarginTop = 0.2f, float pMarginLeft = 0.3f,
+            float pMarginRight = 0.1f, float pMarginBottom = 0.2f)
         {
-            return "<DeviceInfo>" +
-                    "  <OutputFormat>Pdf</OutputFormat>" +
-                    "  <PageWidth>8.5in</PageWidth>" +
-                    "  <PageHeight>11in</PageHeight>" +
-                    "  <MarginTop>0.2in</MarginTop>" +
-                    "  <MarginLeft>0.3in</MarginLeft>" +
-                    "  <MarginRight>0.1in</MarginRight>" +
-                    "  <MarginBottom>0.2in</MarginBottom>" +
+            string layout = "<DeviceInfo>" +
+                    $"<OutputFormat>{pOutputFormat}</OutputFormat><PageWidth>{pPageWith}in</PageWidth>" +
+                    $"<PageHeight>{pPageHeight}in</PageHeight><MarginTop>{pMarginTop}in</MarginTop>" +
+                    $"<MarginLeft>{pMarginLeft}in</MarginLeft><MarginRight>{pMarginRight}in</MarginRight>" +
+                    $"<MarginBottom>{pMarginBottom}in</MarginBottom>" +
                     "</DeviceInfo>";
+            return layout;
         }
     }
 }
