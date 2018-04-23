@@ -9,13 +9,23 @@ namespace Pandora.BackEnd.Api.Controllers
     public class BaseApiController : ApiController
     {
         //private ModelFactory _modelFactory;
-        private ApplicationUserManager _AppUserManager = null;
+        private readonly ApplicationUserManager _AppUserManager = null;
+        private readonly ApplicationRoleManager _AppRoleManager = null;
+
 
         protected ApplicationUserManager AppUserManager
         {
             get
             {
                 return _AppUserManager ?? Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+        }
+
+        protected ApplicationRoleManager AppRoleManager
+        {
+            get
+            {
+                return _AppRoleManager ?? Request.GetOwinContext().GetUserManager<ApplicationRoleManager>();
             }
         }
 

@@ -54,7 +54,7 @@ namespace Pandora.BackEnd.Api.Controllers
                 apiResponse.Content.Headers.ContentType = new MediaTypeHeaderValue("application/pdf");
                 apiResponse.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
                 {
-                    FileName = ""
+                    FileName = "employees_full_list"
                 };
             }
             catch (Exception ex)

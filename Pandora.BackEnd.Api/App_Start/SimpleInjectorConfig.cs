@@ -3,6 +3,8 @@ using Pandora.BackEnd.Business.Contracts;
 using Pandora.BackEnd.Data.Concrets;
 using Pandora.BackEnd.Data.Contracts;
 using Pandora.BackEnd.Data.Helpers;
+using Pandora.BackEnd.Reports;
+using Pandora.BackEnd.Reports.Contracts;
 using SimpleInjector;
 using SimpleInjector.Integration.WebApi;
 using SimpleInjector.Lifestyles;
@@ -32,9 +34,12 @@ namespace ATPSistema.Api.App_Start
             container.Register<IApplicationUow, ApplicationUow>(Lifestyle.Scoped);
             container.Register<IApplicationDbContext, ApplicationDbContext>(Lifestyle.Scoped);            
 
+            //Report Services
+            container.Register<IEmployeeReportSVC, ReportSVC>(Lifestyle.Scoped);
+
             //Bussines Services
-            container.Register<IEmployeeSVC, EmployeeSVC>();
-            
+            container.Register<IEmployeeSVC, EmployeeSVC>(Lifestyle.Scoped);
+
 
             // This is an extension method from the integration package.
             container.RegisterWebApiControllers(GlobalConfiguration.Configuration);

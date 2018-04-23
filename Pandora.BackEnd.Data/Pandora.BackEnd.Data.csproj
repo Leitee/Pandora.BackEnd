@@ -106,6 +106,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Pandora.BackEnd.Common\Pandora.BackEnd.Common.csproj">
+      <Project>{03FBF1D2-2BCA-4237-9EEE-20D012C79690}</Project>
+      <Name>Pandora.BackEnd.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Pandora.BackEnd.Model\Pandora.BackEnd.Model.csproj">
       <Project>{ca00f9a6-6d11-4abf-8452-dc32f048a5be}</Project>
       <Name>Pandora.BackEnd.Model</Name>

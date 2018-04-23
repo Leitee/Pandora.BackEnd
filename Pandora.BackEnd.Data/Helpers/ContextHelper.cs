@@ -7,9 +7,9 @@ namespace Pandora.BackEnd.Data.Helpers
 {
     public static class ContextHelper
     {
-        public static UserManager<AppUser> GetUserManager(ApplicationDbContext _context)
+        public static UserManager<AppUser> GetUserManager(ApplicationDbContext pContext)
         {
-            var userStored = new UserStore<AppUser>(_context);
+            var userStored = new UserStore<AppUser>(pContext);
 
             return new UserManager<AppUser>(userStored);
         }
