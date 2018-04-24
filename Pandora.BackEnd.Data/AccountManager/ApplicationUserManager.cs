@@ -1,8 +1,7 @@
-﻿using AspNetIdentity.WebApi.Services;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
+﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
+using Pandora.BackEnd.Common;
 using Pandora.BackEnd.Data.Concrets;
 using Pandora.BackEnd.Model.AppEntity;
 using System;
@@ -11,22 +10,27 @@ namespace Pandora.BackEnd.Data.AccountManager
 {
     public class ApplicationUserManager : UserManager<AppUser>
     {
+        private static IUserStore<AppUser> _store;
+
         public ApplicationUserManager(IUserStore<AppUser> store) : base(store)
         {
+            _store = store;
         }
 
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
         {
-            var manager = new ApplicationUserManager(new UserStore<AppUser>(context.Get<ApplicationDbContext>()));
+            var appContext = context.Get<ApplicationDbContext>();
+            var manager = new ApplicationUserManager(_store);
+
             // Configure validation logic for usernames
-            manager.UserValidator = new UserValidator<AppUser>(manager)
+            manager.UserValidator = new CustomUserValidator(Helpers.ContextHelper.GetUserManager(appContext))
             {
                 AllowOnlyAlphanumericUserNames = false,
                 RequireUniqueEmail = true
             };
 
             // Configure validation logic for passwords
-            manager.PasswordValidator = new PasswordValidator
+            manager.PasswordValidator = new CustomPasswordValidator
             {
                 RequiredLength = 6,
                 RequireNonLetterOrDigit = true,

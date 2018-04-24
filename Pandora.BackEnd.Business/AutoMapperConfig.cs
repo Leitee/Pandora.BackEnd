@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
-using Pandora.BackEnd.Business.DRO;
+using Pandora.BackEnd.Business.DTO;
 using Pandora.BackEnd.Common.Helpers;
 using Pandora.BackEnd.Model.Users;
 
-namespace Pandora.BackEnd.Business.DTO
+namespace Pandora.BackEnd.Business
 {
     public class AutoMapperConfig
     {

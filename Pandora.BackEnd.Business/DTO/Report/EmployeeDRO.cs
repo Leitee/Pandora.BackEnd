@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Pandora.BackEnd.Business.DRO
+namespace Pandora.BackEnd.Business.DTO
 {
     public class EmployeeDRO
     {

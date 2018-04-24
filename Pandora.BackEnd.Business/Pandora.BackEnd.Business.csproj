@@ -101,8 +101,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\CustomJwtFormat.cs" />
     <Compile Include="Providers\CustomOAuthProvider.cs" />
+    <Compile Include="Providers\ExtendedClaimsProvider.cs" />
     <Compile Include="Providers\TokenRefreshProvider.cs" />
-    <Compile Include="DRO\EmployeeDRO.cs" />
+    <Compile Include="DTO\Report\EmployeeDRO.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

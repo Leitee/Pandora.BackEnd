@@ -61,11 +61,9 @@ namespace Pandora.BackEnd.Api.Controllers
             {
                 //Elmah.ErrorSignal.FromCurrentContext().Raise(new Exception(ex.Message, ex));
                 return new HttpResponseMessage(HttpStatusCode.BadRequest);
-            }
-            
+            }          
 
             return apiResponse;
-
         }
     }
 }

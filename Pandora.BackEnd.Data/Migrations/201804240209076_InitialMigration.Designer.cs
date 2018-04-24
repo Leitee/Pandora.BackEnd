@@ -13,7 +13,7 @@ namespace Pandora.BackEnd.Data.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201804111750216_InitialMigration"; }
+            get { return "201804240209076_InitialMigration"; }
         }
         
         string IMigrationMetadata.Source

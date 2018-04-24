@@ -1,7 +1,6 @@
-﻿using ATPSistema.Api.App_Start;
-using Microsoft.Owin.Security.OAuth;
+﻿using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json.Serialization;
-using Pandora.BackEnd.Business.DTO;
+using Pandora.BackEnd.Business;
 using SimpleInjector;
 using System.Linq;
 using System.Net.Http.Formatting;

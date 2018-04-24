@@ -5,7 +5,7 @@ using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
 
-namespace AspNetIdentity.WebApi.Services
+namespace Pandora.BackEnd.Common
 {
     public class EmailService : IIdentityMessageService
     {

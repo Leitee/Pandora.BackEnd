@@ -10,7 +10,7 @@ using SimpleInjector.Integration.WebApi;
 using SimpleInjector.Lifestyles;
 using System.Web.Http;
 
-namespace ATPSistema.Api.App_Start
+namespace Pandora.BackEnd.Api
 {
     public static class SimpleInjectorConfig
     {

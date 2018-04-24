@@ -5,6 +5,7 @@ namespace Pandora.BackEnd.Data.Migrations
     using Pandora.BackEnd.Data.Helpers;
     using Pandora.BackEnd.Model.AppEntity;
     using Pandora.BackEnd.Model.Users;
+    using System;
     using System.Collections.Generic;
     using System.Data.Entity.Migrations;
 
@@ -26,7 +27,8 @@ namespace Pandora.BackEnd.Data.Migrations
                 );
 
             context.Users.AddOrUpdate(u => u.UserName,
-                new AppUser { UserName = "devadmin", PasswordHash = new PasswordHasher().HashPassword("dev123456") }
+                new AppUser { UserName = "devadmin", PasswordHash = new PasswordHasher().HashPassword("dev321"),
+                    Email = "info@pandorasistemas.com", FirstName = "Jhon", LastName = "Doe", JoinDate = DateTime.Now }
                 );
             context.SaveChanges();
 
@@ -35,7 +37,7 @@ namespace Pandora.BackEnd.Data.Migrations
             usrMngr.AddToRole(usrMngr.FindByName("devadmin").Id, "Administrator");
 
             context.Employees.AddOrUpdate(e => e.EmployeeId,
-                new Employee { FirstName = "Jhon", LastName = "Doe", Gender = Model.GenderEnum.MAN, User = usrMngr.FindByName("devadmin") }
+                new Employee { BirthDate = new DateTime(1999, 12, 30), Gender = Model.GenderEnum.MAN, User = usrMngr.FindByName("devadmin") }
                 );
         }
     }

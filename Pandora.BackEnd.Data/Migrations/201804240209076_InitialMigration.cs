@@ -13,9 +13,8 @@ namespace Pandora.BackEnd.Data.Migrations
                     {
                         EmployeeId = c.Int(nullable: false, identity: true),
                         UserId = c.String(maxLength: 128),
-                        FirstName = c.String(),
-                        LastName = c.String(),
                         Gender = c.Int(nullable: false),
+                        BirthDate = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.EmployeeId)
                 .ForeignKey("dbo.Users", t => t.UserId)
@@ -37,6 +36,9 @@ namespace Pandora.BackEnd.Data.Migrations
                         LockoutEnabled = c.Boolean(nullable: false),
                         AccessFailedCount = c.Int(nullable: false),
                         UserName = c.String(nullable: false, maxLength: 256),
+                        FirstName = c.String(maxLength: 100),
+                        LastName = c.String(maxLength: 100),
+                        JoinDate = c.DateTime(),
                         Discriminator = c.String(nullable: false, maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id)

@@ -15,8 +15,6 @@ namespace Pandora.BackEnd.Api
 
         protected void Application_Start()
         {
-            GlobalConfiguration.Configure(WebApiConfig.Register);
-
             //Start SQL Dependency
             SqlDependency.Start(connString);
         }

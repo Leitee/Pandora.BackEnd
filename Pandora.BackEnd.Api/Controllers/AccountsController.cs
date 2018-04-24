@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using Microsoft.AspNet.Identity;
+using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace Pandora.BackEnd.Api.Controllers
@@ -27,6 +28,46 @@ namespace Pandora.BackEnd.Api.Controllers
             {
                 return GetErrorResult(result);
             }
+        }
+
+        [Authorize]
+        [Route("ChangePassword")]
+        public async Task<IHttpActionResult> ChangePassword(dynamic model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            IdentityResult result = await this.AppUserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
+
+            if (!result.Succeeded)
+            {
+                return GetErrorResult(result);
+            }
+            return Ok();
+        }
+
+        //Only Admin can delete users
+        [Authorize(Roles = "Admin")]
+        [Route("user/{id:guid}")]
+        [HttpDelete]
+        public async Task<IHttpActionResult> DeleteUser(string id)
+        {
+            var appUser = await this.AppUserManager.FindByIdAsync(id);
+
+            if (appUser != null)
+            {
+                IdentityResult result = await this.AppUserManager.DeleteAsync(appUser);
+
+                if (!result.Succeeded)
+                {
+                    return GetErrorResult(result);
+                }
+
+                return Ok();
+            }
+            return NotFound();
         }
     }
 }
