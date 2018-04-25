@@ -22,21 +22,21 @@ namespace Pandora.BackEnd.Data.Migrations
             //  to avoid creating duplicate seed data.
 
             context.Roles.AddOrUpdate(r => r.Id,
-                new AppRole { Name = "Administrator", Description = "The highest privilege role at Application" }
+                new AppRole { Name = "Admin", Description = "The highest privilege role at Application" }
                 );
 
             context.Users.AddOrUpdate(u => u.UserName,
-                new AppUser { UserName = "devadmin", PasswordHash = new PasswordHasher().HashPassword("dev321"),
+                new AppUser { UserName = "devadmin", PasswordHash = new PasswordHasher().HashPassword("dev321"), EmailConfirmed = true,
                     Email = "info@pandorasistemas.com", FirstName = "Jhon", LastName = "Doe", JoinDate = DateTime.Now }
                 );
             context.SaveChanges();
 
             var usrMngr = ContextHelper.GetUserManager(context);
 
-            usrMngr.AddToRole(usrMngr.FindByName("devadmin").Id, "Administrator");
+            usrMngr.AddToRole(usrMngr.FindByName("devadmin").Id, "Admin");
 
             context.Employees.AddOrUpdate(e => e.EmployeeId,
-                new Employee { BirthDate = new DateTime(1999, 12, 30), Gender = Model.GenderEnum.MAN, User = usrMngr.FindByName("devadmin") }
+                new Employee { BirthDate = new DateTime(1999, 12, 30), Gender = Model.GenderEnum.MAN, AppUser = usrMngr.FindByName("devadmin") }
                 );
         }
     }

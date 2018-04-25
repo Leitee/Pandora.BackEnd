@@ -12,13 +12,13 @@ namespace Pandora.BackEnd.Data.Migrations
                 c => new
                     {
                         EmployeeId = c.Int(nullable: false, identity: true),
-                        UserId = c.String(maxLength: 128),
+                        AppsUerId = c.String(maxLength: 128),
                         Gender = c.Int(nullable: false),
                         BirthDate = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.EmployeeId)
-                .ForeignKey("dbo.Users", t => t.UserId)
-                .Index(t => t.UserId);
+                .ForeignKey("dbo.Users", t => t.AppsUerId)
+                .Index(t => t.AppsUerId);
             
             CreateTable(
                 "dbo.Users",
@@ -105,14 +105,14 @@ namespace Pandora.BackEnd.Data.Migrations
             DropForeignKey("dbo.UserLogin", "IdentityUser_Id", "dbo.Users");
             DropForeignKey("dbo.UserClaim", "IdentityUser_Id", "dbo.Users");
             DropForeignKey("dbo.UserRole", "RoleId", "dbo.Roles");
-            DropForeignKey("dbo.Employees", "UserId", "dbo.Users");
+            DropForeignKey("dbo.Employees", "AppsUerId", "dbo.Users");
             DropIndex("dbo.Roles", "RoleNameIndex");
             DropIndex("dbo.UserRole", new[] { "IdentityUser_Id" });
             DropIndex("dbo.UserRole", new[] { "RoleId" });
             DropIndex("dbo.UserLogin", new[] { "IdentityUser_Id" });
             DropIndex("dbo.UserClaim", new[] { "IdentityUser_Id" });
             DropIndex("dbo.Users", "UserNameIndex");
-            DropIndex("dbo.Employees", new[] { "UserId" });
+            DropIndex("dbo.Employees", new[] { "AppsUerId" });
             DropTable("dbo.Roles");
             DropTable("dbo.UserRole");
             DropTable("dbo.UserLogin");
