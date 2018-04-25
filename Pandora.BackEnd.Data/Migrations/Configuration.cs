@@ -6,7 +6,6 @@ namespace Pandora.BackEnd.Data.Migrations
     using Pandora.BackEnd.Model.AppEntity;
     using Pandora.BackEnd.Model.Users;
     using System;
-    using System.Collections.Generic;
     using System.Data.Entity.Migrations;
 
     internal sealed class Configuration : DbMigrationsConfiguration<ApplicationDbContext>

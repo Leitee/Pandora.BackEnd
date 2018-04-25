@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Pandora.BackEnd.Data.Concrets
 {
-    public class AuthRepository : EFRepository<AppUser>, IAuthRepository
+    public class AuthRepository : EFRepository<AppUser>, IAuthRepository, IDisposable
     {
         private readonly IApplicationDbContext _currentContext;
 
@@ -22,7 +22,7 @@ namespace Pandora.BackEnd.Data.Concrets
             : base(dbContext)
         {
             this._currentContext = dbContext;
-            _userManager = new ApplicationUserManager(new UserStore<AppUser>(new ApplicationDbContext()));
+            _userManager = new ApplicationUserManager(new UserStore<AppUser>(dbContext as ApplicationDbContext));
         }
 
         public async Task<List<AppUser>> GeAllUsersAsync()
@@ -189,7 +189,6 @@ namespace Pandora.BackEnd.Data.Concrets
             return response;
         }
 
-
         public async Task<IList<string>> GetRolesByUserIdAsync(string userId)
         {
             try
@@ -201,14 +200,6 @@ namespace Pandora.BackEnd.Data.Concrets
                 throw new Exception(ex.Message, ex.InnerException);
             }
         }
-
-        //public async Task<Cliente> FindClient(string clientId)
-        //{
-
-        //    var client = _currentUnitOfWork.Clientes.Find(clientId);
-
-        //    return client;
-        //}
 
         //public async Task<bool> AddRefreshToken(RefreshToken token)
         //{
@@ -392,8 +383,8 @@ namespace Pandora.BackEnd.Data.Concrets
 
         public void Dispose()
         {
-            //_ctx.Dispose();
-            this._userManager.Dispose();
+            _currentContext.Dispose();
+            _userManager.Dispose();
         }
     }
 }

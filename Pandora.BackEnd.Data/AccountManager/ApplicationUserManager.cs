@@ -23,7 +23,7 @@ namespace Pandora.BackEnd.Data.AccountManager
             var manager = new ApplicationUserManager(_store);
 
             // Configure validation logic for usernames
-            manager.UserValidator = new CustomUserValidator(Helpers.ContextHelper.GetUserManager(appContext))
+            manager.UserValidator = new CustomUserValidator<AppUser>(Helpers.ContextHelper.GetUserManager(appContext))
             {
                 AllowOnlyAlphanumericUserNames = false,
                 RequireUniqueEmail = true

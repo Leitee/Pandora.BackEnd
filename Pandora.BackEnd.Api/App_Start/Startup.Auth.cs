@@ -55,7 +55,7 @@ namespace Pandora.BackEnd.Api
             // Configure the application for OAuth based flow
             var oAuthServerOptions = new OAuthAuthorizationServerOptions()
             {
-                TokenEndpointPath = new PathString("/oauth/token"),
+                TokenEndpointPath = new PathString("/auth/login"),
                 AccessTokenExpireTimeSpan = TimeSpan.FromDays(1),
                 Provider = new CustomOAuthProvider(),
                 AccessTokenFormat = new CustomJwtFormat("http://localhost"),

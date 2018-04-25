@@ -25,7 +25,7 @@ namespace Pandora.BackEnd.Api
             config.DependencyResolver = SimpleInjectorConfig.Register(new Container());
 
             // Set AutoMapper Mapping
-            AutoMapperConfig.Execute();
+            AutoMapperConfig.Register();
 
             // Web API routes
             config.MapHttpAttributeRoutes();

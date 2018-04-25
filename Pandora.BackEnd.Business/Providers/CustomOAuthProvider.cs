@@ -20,13 +20,12 @@ namespace Pandora.BackEnd.Bussines.Providers
         // validate username and password from the request and validate them against our ASP.NET 2.1 Identity system
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
-            var userManager = context.OwinContext.GetUserManager<ApplicationUserManager>();
-
             // cors allowed
             var allowedOrigin = "*";
             context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { allowedOrigin });
-
-            AppUser user = await userManager.FindAsync(context.UserName, context.Password);
+            
+            var userManager = context.OwinContext.GetUserManager<ApplicationUserManager>();
+            AppUser user = await userManager.FindAsync(context.UserName, context.Password);            
 
             if (! await userManager.CheckPasswordAsync(user, context.Password))
             {

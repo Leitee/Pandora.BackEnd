@@ -107,11 +107,5 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Pandora.BackEnd.Model\Pandora.BackEnd.Model.csproj">
-      <Project>{CA00F9A6-6D11-4ABF-8452-DC32F048A5BE}</Project>
-      <Name>Pandora.BackEnd.Model</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

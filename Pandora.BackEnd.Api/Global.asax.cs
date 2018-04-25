@@ -1,7 +1,6 @@
 ﻿using System.Configuration;
 using System.Data.SqlClient;
 using System.Web;
-using System.Web.Http;
 
 namespace Pandora.BackEnd.Api
 {

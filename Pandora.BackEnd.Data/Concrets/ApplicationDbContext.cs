@@ -15,8 +15,6 @@ namespace Pandora.BackEnd.Data.Concrets
         public ApplicationDbContext() : base("name=ReleaseConnection") { }
 #endif
 
-        public DbSet<Employee> Employees { get; set; }
-
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
@@ -36,5 +34,8 @@ namespace Pandora.BackEnd.Data.Concrets
             modelBuilder.Entity<AppUser>().ToTable("Users");
             modelBuilder.Entity<AppRole>().ToTable("Roles");
         }
+
+        //entities set
+        public virtual IDbSet<Employee> Employees { get; set; }
     }
 }

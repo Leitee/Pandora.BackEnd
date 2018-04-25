@@ -7,7 +7,7 @@ namespace Pandora.BackEnd.Business
 {
     public class AutoMapperConfig
     {
-        public static void Execute()
+        public static void Register()
         {
             Mapper.Initialize(map =>
             {
