@@ -1,5 +1,4 @@
 ﻿using Microsoft.Owin.Security;
-using Microsoft.Owin.Security.DataHandler.Encoder;
 using System;
 using System.IdentityModel.Tokens;
 using Thinktecture.IdentityModel.Tokens;
@@ -8,13 +7,15 @@ namespace Pandora.BackEnd.Bussines.Providers
 {
     public class CustomJwtFormat : ISecureDataFormat<AuthenticationTicket>
     {
-        private static readonly byte[] _secret = TextEncodings.Base64Url.Decode("IxrAjDoa2FqElO7IhrSrUJELhUckePEPVpaePlS_Xaw");
-
         private readonly string _issuer;
+        private readonly string _audienceId;
+        private readonly byte[] _audienceSecret;
 
-        public CustomJwtFormat(string issuer)
+        public CustomJwtFormat(string pIssuer, string pAudienceId, byte[] _pAudienceSecret)
         {
-            _issuer = issuer;
+            _issuer = pIssuer;
+            _audienceId = pAudienceId;
+            _audienceSecret = _pAudienceSecret;
         }
 
         public string Protect(AuthenticationTicket data)
@@ -24,12 +25,13 @@ namespace Pandora.BackEnd.Bussines.Providers
                 throw new ArgumentNullException(nameof(data));
             }
 
-            var signingKey = new HmacSigningCredentials(_secret);
+            var signingKey = new HmacSigningCredentials(_audienceSecret);
             var issued = data.Properties.IssuedUtc;
             var expires = data.Properties.ExpiresUtc;
 
-            return new JwtSecurityTokenHandler().WriteToken(
-                new JwtSecurityToken(_issuer, "Any", data.Identity.Claims, issued.Value.UtcDateTime, expires.Value.UtcDateTime, signingKey));
+            var token = new JwtSecurityToken(_issuer, _audienceId, data.Identity.Claims, issued.Value.UtcDateTime, expires.Value.UtcDateTime, signingKey);
+            var handler = new JwtSecurityTokenHandler();
+            return handler.WriteToken(token);
         }
 
         public AuthenticationTicket Unprotect(string protectedText)

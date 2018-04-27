@@ -22,8 +22,9 @@ namespace Pandora.BackEnd.Model.AppEntity
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<AppUser> manager)
         {
+            string authenticationType = "JWT";
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
-            var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ExternalBearer);
+            var userIdentity = await manager.CreateIdentityAsync(this, authenticationType);
 
             // Add custom user claims here
 

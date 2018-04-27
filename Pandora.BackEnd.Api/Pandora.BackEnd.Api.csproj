@@ -46,6 +46,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=6.2.2.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.6.2.2\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Elmah, Version=1.2.14706.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\elmah.corelibrary.1.2.2\lib\Elmah.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -201,6 +207,9 @@
     <Compile Include="Controllers\AccountsController.cs" />
     <Compile Include="Controllers\BaseApiController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
+    <Compile Include="Exceptions\ExceptionHandler.cs" />
+    <Compile Include="Exceptions\ElmahExceptionLogger.cs" />
+    <Compile Include="Filters\NavigationFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -221,14 +230,6 @@
     <ProjectReference Include="..\Pandora.BackEnd.Business\Pandora.BackEnd.Business.csproj">
       <Project>{FC76754C-4433-462C-98D5-8159B28A72A1}</Project>
       <Name>Pandora.BackEnd.Business</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Pandora.BackEnd.Data\Pandora.BackEnd.Data.csproj">
-      <Project>{2C6016C4-F70E-4E40-8852-A41C89907794}</Project>
-      <Name>Pandora.BackEnd.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Pandora.BackEnd.Model\Pandora.BackEnd.Model.csproj">
-      <Project>{CA00F9A6-6D11-4ABF-8452-DC32F048A5BE}</Project>
-      <Name>Pandora.BackEnd.Model</Name>
     </ProjectReference>
     <ProjectReference Include="..\Pandora.BackEnd.Reports\Pandora.BackEnd.Reports.csproj">
       <Project>{03D9144D-2D0A-4C39-B6C8-EBD7CA108E64}</Project>

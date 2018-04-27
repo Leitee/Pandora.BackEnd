@@ -1,10 +1,5 @@
-﻿using Pandora.BackEnd.Business.Concrets;
-using Pandora.BackEnd.Business.Contracts;
-using Pandora.BackEnd.Data.Concrets;
-using Pandora.BackEnd.Data.Contracts;
-using Pandora.BackEnd.Data.Helpers;
-using Pandora.BackEnd.Reports;
-using Pandora.BackEnd.Reports.Contracts;
+﻿using Pandora.BackEnd.Business.Config;
+using Pandora.BackEnd.Reports.Config;
 using SimpleInjector;
 using SimpleInjector.Integration.WebApi;
 using SimpleInjector.Lifestyles;
@@ -22,24 +17,11 @@ namespace Pandora.BackEnd.Api
 
             container.Options.DefaultScopedLifestyle = new AsyncScopedLifestyle();// new WebApiRequestLifestyle();
 
-            // Register your types, for instance using the scoped lifestyle:
-
-            //Repository
-            container.Register<IRepositoryProvider, RepositoryProvider>(Lifestyle.Scoped);
-            container.Register<IAuthRepository, AuthRepository>(Lifestyle.Scoped);
-            container.Register<IRolRepository, RolRepository>(Lifestyle.Scoped);
-            container.Register<RepositoryFactories, RepositoryFactories>(Lifestyle.Singleton);
-
-            //Unit of Work
-            container.Register<IApplicationUow, ApplicationUow>(Lifestyle.Scoped);
-            container.Register<IApplicationDbContext, ApplicationDbContext>(Lifestyle.Scoped);            
+            //Bussines Services
+            SimpleInjectorBusinessConfig.Register(ref container);
 
             //Report Services
-            container.Register<IEmployeeReportSVC, ReportSVC>(Lifestyle.Scoped);
-
-            //Bussines Services
-            container.Register<IEmployeeSVC, EmployeeSVC>(Lifestyle.Scoped);
-
+            SimpleInjectorReportConfig.Register(ref container);
 
             // This is an extension method from the integration package.
             container.RegisterWebApiControllers(GlobalConfiguration.Configuration);

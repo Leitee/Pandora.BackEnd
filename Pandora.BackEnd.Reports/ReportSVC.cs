@@ -1,7 +1,7 @@
-﻿using Pandora.BackEnd.Business.DTO;
-using Pandora.BackEnd.Data.Contracts;
+﻿using Pandora.BackEnd.Data.Contracts;
 using Pandora.BackEnd.Model.Users;
 using Pandora.BackEnd.Reports.Contracts;
+using Pandora.BackEnd.Reports.DRO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +29,7 @@ namespace Pandora.BackEnd.Reports
 
                 var reportInstance = new ReportMaker("EmployeesFullList", "EmployeeFullListDS", empsRep, ReportMaker.GetDeviceInfoXML());
 
-                report.Data = reportInstance.Create();
+                report.Report = reportInstance.Create();
             }
             catch (Exception ex)
             {

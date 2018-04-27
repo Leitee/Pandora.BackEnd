@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Pandora.BackEnd.Reports
 {
     public class RLResponse
     {
-        public byte[] Data { get; set; }
+        public byte[] Report { get; set; }
 
         public int Count { get { return Errors.Count; } }
 
@@ -14,8 +13,6 @@ namespace Pandora.BackEnd.Reports
         public string ErrorCode { get; set; }
 
         public List<string> Errors { get; set; }
-
-        public Exception Exception { get; set; }
 
         public RLResponse()
         {

@@ -5,10 +5,7 @@ using Microsoft.Owin.Security.DataHandler.Encoder;
 using Microsoft.Owin.Security.Jwt;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
-using Pandora.BackEnd.Business;
 using Pandora.BackEnd.Bussines.Providers;
-using Pandora.BackEnd.Data.AccountManager;
-using Pandora.BackEnd.Data.Concrets;
 using System;
 using System.Configuration;
 using System.Web.Http;
@@ -17,40 +14,37 @@ namespace Pandora.BackEnd.Api
 {
     public partial class Startup
     {
-        private HttpConfiguration httpConfig;
+        private HttpConfiguration _httpConfig;
+        private string _issuer;
+        private string _audienceId;
+        private byte[] _audienceSecret;
 
         // For more information on configuring authentication, please visit https://go.microsoft.com/fwlink/?LinkId=301864
         public void ConfigureAuth(IAppBuilder app)
         {
-            // Set AutoMapper Mapping
-            AutoMapperConfig.Register();
+            // set token values options
+            _issuer = "http://localhost:12345";
+            _audienceId = ConfigurationManager.AppSettings["as:AudienceId"];
+            _audienceSecret = TextEncodings.Base64Url.Decode(ConfigurationManager.AppSettings["as:AudienceSecret"]);
 
-            httpConfig = new HttpConfiguration();
+            _httpConfig = new HttpConfiguration();
 
             ConfigureOAuthTokenGeneration(app);
 
             ConfigureOAuthTokenConsumption(app);
 
-            ConfigureSocialAuth(httpConfig);
+            ConfigureSocialAuth(_httpConfig);
 
-            WebApiConfig.Register(httpConfig);
+            WebApiConfig.Register(_httpConfig);
 
             app.UseCors(CorsOptions.AllowAll);
 
-            app.UseWebApi(httpConfig);
-
-            app.MapSignalR();           
+            app.UseWebApi(_httpConfig);
         }
 
 
         private void ConfigureOAuthTokenGeneration(IAppBuilder app)
         {
-            // Configure the db context and user manager to use a single instance per request
-            app.CreatePerOwinContext(ApplicationDbContext.Create);
-            app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
-            app.CreatePerOwinContext<ApplicationRoleManager>(ApplicationRoleManager.Create);
-
-
             // Enable the application to use a cookie to store information for the signed in user
             // and to use a cookie to temporarily store information about a user logging in with a third party login provider
             //app.UseCookieAuthentication(new CookieAuthenticationOptions());
@@ -60,9 +54,10 @@ namespace Pandora.BackEnd.Api
             var oAuthServerOptions = new OAuthAuthorizationServerOptions()
             {
                 TokenEndpointPath = new PathString("/auth/login"),
-                AccessTokenExpireTimeSpan = TimeSpan.FromDays(1),
+                AccessTokenExpireTimeSpan = TimeSpan.FromHours(12),
                 Provider = new CustomOAuthProvider(),
-                AccessTokenFormat = new CustomJwtFormat("http://localhost"),
+                AccessTokenFormat = new CustomJwtFormat(_issuer, _audienceId, _audienceSecret),
+                RefreshTokenProvider = new TokenRefreshProvider(),
                 //For Dev enviroment only (on production should be AllowInsecureHttp = false)
                 AllowInsecureHttp = true
             };
@@ -73,18 +68,14 @@ namespace Pandora.BackEnd.Api
 
         private void ConfigureOAuthTokenConsumption(IAppBuilder app)
         {
-            var issuer = "http://localhost";
-            string audienceId = ConfigurationManager.AppSettings["as:AudienceId"];
-            byte[] audienceSecret = TextEncodings.Base64Url.Decode(ConfigurationManager.AppSettings["as:AudienceSecret"]);
-
             // Api controllers with an [Authorize] attribute will be validated with JWT
             var oAuthServerOptions = new JwtBearerAuthenticationOptions
             {
                 AuthenticationMode = AuthenticationMode.Active,
-                AllowedAudiences = new[] { audienceId },
+                AllowedAudiences = new[] { _audienceId },
                 IssuerSecurityTokenProviders = new IIssuerSecurityTokenProvider[]
                 {
-                   new SymmetricKeyIssuerSecurityTokenProvider(issuer, audienceSecret)
+                   new SymmetricKeyIssuerSecurityTokenProvider(_issuer, _audienceSecret)
                 }
             };
 

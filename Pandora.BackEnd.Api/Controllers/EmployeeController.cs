@@ -9,7 +9,7 @@ using System.Web.Http;
 
 namespace Pandora.BackEnd.Api.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [RoutePrefix("api/employee")]
     public class EmployeeController : BaseApiController
     {
@@ -27,9 +27,7 @@ namespace Pandora.BackEnd.Api.Controllers
             var response = await _employeeSvc.GetAllAsync();
 
             if (response.HasErrors)
-            {
-                return BadRequest(string.Join(" - ", response.Errors.ToArray()));
-            }
+                throw new Exception(string.Join(" - ", response.Errors.ToArray()));
 
             return Ok(response.Data);
         }
@@ -39,29 +37,21 @@ namespace Pandora.BackEnd.Api.Controllers
         {
             HttpResponseMessage apiResponse;
 
-            try
-            {
-                var response = await _employeeReportSVC.EmployeeFullListReport();
+            var response = await _employeeReportSVC.EmployeeFullListReport();
 
-                if (response.HasErrors)
-                    throw response.Exception;
+            if (response.HasErrors)
+                throw new Exception(string.Join(" - ", response.Errors.ToArray()));
 
-                apiResponse = new HttpResponseMessage(HttpStatusCode.OK)
-                {
-                    Content = new ByteArrayContent(response.Data)
-                };
-                apiResponse.Content.Headers.ContentLength = response.Data.Length;
-                apiResponse.Content.Headers.ContentType = new MediaTypeHeaderValue("application/pdf");
-                apiResponse.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
-                {
-                    FileName = "employees_full_list"
-                };
-            }
-            catch (Exception ex)
+            apiResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                //Elmah.ErrorSignal.FromCurrentContext().Raise(new Exception(ex.Message, ex));
-                return new HttpResponseMessage(HttpStatusCode.BadRequest);
-            }          
+                Content = new ByteArrayContent(response.Report)
+            };
+            apiResponse.Content.Headers.ContentLength = response.Report.Length;
+            apiResponse.Content.Headers.ContentType = new MediaTypeHeaderValue("application/pdf");
+            apiResponse.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
+            {
+                FileName = "employees_full_list"
+            };        
 
             return apiResponse;
         }

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Pandora.BackEnd.Business
 {
@@ -15,12 +14,10 @@ namespace Pandora.BackEnd.Business
 
         public List<string> Errors { get; set; }
 
-        public Exception Exception { get; set; }
-
         public BLResponse()
         {
-            this.Errors = new List<string>();
-            this.HasErrors = false;
+            Errors = new List<string>();
+            HasErrors = false;
         }
     }
 }

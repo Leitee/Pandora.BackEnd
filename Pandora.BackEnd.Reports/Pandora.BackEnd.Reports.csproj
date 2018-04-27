@@ -42,6 +42,9 @@
     <Reference Include="Microsoft.ReportViewer.WebForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Report.Viewer.11.0.0.0\lib\net\Microsoft.ReportViewer.WebForms.DLL</HintPath>
     </Reference>
+    <Reference Include="SimpleInjector, Version=4.2.1.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleInjector.4.2.1\lib\net45\SimpleInjector.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net.Http, Version=4.1.1.2, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -68,12 +71,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Config\ReportMapperProfile.cs" />
+    <Compile Include="Config\SimpleInjectorReportConfig.cs" />
     <Compile Include="DataSet\EmployeeFullListDS.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>EmployeeFullListDS.xsd</DependentUpon>
     </Compile>
     <Compile Include="ReportMaker.cs" />
+    <Compile Include="DRO\EmployeeDRO.cs" />
     <Compile Include="RLResponse.cs" />
     <Compile Include="Contracts\IEmployeeReportSVC.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -83,9 +89,9 @@
     <EmbeddedResource Include="Reports\EmployeesFullList.rdlc" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Pandora.BackEnd.Business\Pandora.BackEnd.Business.csproj">
-      <Project>{FC76754C-4433-462C-98D5-8159B28A72A1}</Project>
-      <Name>Pandora.BackEnd.Business</Name>
+    <ProjectReference Include="..\Pandora.BackEnd.Common\Pandora.BackEnd.Common.csproj">
+      <Project>{03FBF1D2-2BCA-4237-9EEE-20D012C79690}</Project>
+      <Name>Pandora.BackEnd.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\Pandora.BackEnd.Data\Pandora.BackEnd.Data.csproj">
       <Project>{2C6016C4-F70E-4E40-8852-A41C89907794}</Project>
