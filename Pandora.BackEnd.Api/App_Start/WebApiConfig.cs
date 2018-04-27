@@ -1,6 +1,5 @@
 ﻿using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json.Serialization;
-using Pandora.BackEnd.Business;
 using SimpleInjector;
 using System.Linq;
 using System.Net.Http.Formatting;
@@ -23,10 +22,7 @@ namespace Pandora.BackEnd.Api
 
             // Set webapi dependency resolver
             config.DependencyResolver = SimpleInjectorConfig.Register(new Container());
-
-            // Set AutoMapper Mapping
-            AutoMapperConfig.Register();
-
+            
             // Web API routes
             config.MapHttpAttributeRoutes();
 

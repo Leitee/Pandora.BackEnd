@@ -19,7 +19,10 @@ namespace Pandora.BackEnd.Data.Concrets
         }
 
         // Repositories
-        public IRepository<Employee> EmployeeRepository => GetStandardRepo<Employee>();
+        public IAuthRepository Users => GetRepo<IAuthRepository>();
+        public IRolRepository Roles => GetRepo<IRolRepository>();
+        public IRepository<Employee> Employees => GetStandardRepo<Employee>();
+
 
         /// <summary>
         /// Save pending changes to the database

@@ -24,7 +24,7 @@ namespace Pandora.BackEnd.Reports
 
             try
             {
-                var empsAsync = await _uow.EmployeeRepository.AllAsync(null, null, null);
+                var empsAsync = await _uow.Employees.AllAsync(null, null, null);
                 var empsRep = AutoMapper.Mapper.Map<List<Employee>, EmployeeDRO>(empsAsync.ToList());
 
                 var reportInstance = new ReportMaker("EmployeesFullList", "EmployeeFullListDS", empsRep, ReportMaker.GetDeviceInfoXML());

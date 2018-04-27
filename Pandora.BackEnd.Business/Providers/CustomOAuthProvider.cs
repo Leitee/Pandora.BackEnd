@@ -34,9 +34,16 @@ namespace Pandora.BackEnd.Bussines.Providers
                 return;
             }
 
-            if ( await userManager.IsEmailConfirmedAsync(user.Id))
+            if (! await userManager.IsEmailConfirmedAsync(user.Id))
             {
                 context.SetError("invalid_grant", "User did not confirm email.");
+                context.Rejected();
+                return;
+            }
+
+            if (await userManager.IsLockedOutAsync(user.Id))
+            {
+                context.SetError("invalid_grant", "This User is currently locked out.");
                 context.Rejected();
                 return;
             }

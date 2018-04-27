@@ -34,7 +34,7 @@ namespace Pandora.BackEnd.Business.Concrets
 
             try
             {
-                var empsAsync = await Uow.EmployeeRepository.AllAsync(null, null, null);
+                var empsAsync = await Uow.Employees.AllAsync(e => e.Gender == Model.GenderEnum.MAN, o => o.OrderBy(e => e.BirthDate), e => e.AppUser);
 
                 response.Data = Mapper.Map<List<Employee>, List<EmployeeDTO>>(empsAsync.ToList());
             }

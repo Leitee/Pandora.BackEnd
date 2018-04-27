@@ -27,7 +27,7 @@ namespace Pandora.BackEnd.Data.Migrations
 
             context.Users.AddOrUpdate(u => u.UserName,
                 new AppUser { UserName = "devadmin", PasswordHash = new PasswordHasher().HashPassword("dev321"), EmailConfirmed = true,
-                    Email = "info@pandorasistemas.com", FirstName = "Jhon", LastName = "Doe", JoinDate = DateTime.Now }
+                    Email = "info@pandorasistemas.com", FirstName = "Jhon", LastName = "Doe", JoinDate = DateTime.Now, SecurityStamp = Guid.NewGuid().ToString() }
                 );
             context.SaveChanges();
 

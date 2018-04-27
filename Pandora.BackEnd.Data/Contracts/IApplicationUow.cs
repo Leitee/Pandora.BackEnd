@@ -6,7 +6,11 @@ namespace Pandora.BackEnd.Data.Contracts
     {
         bool Commit();
 
-        //Repositorios
-        IRepository<Employee> EmployeeRepository { get; }
+        //Account Repositories  
+        IAuthRepository Users   { get; }
+        IRolRepository Roles { get; }
+
+        //Model Repositories
+        IRepository<Employee> Employees { get; }
     }
 }

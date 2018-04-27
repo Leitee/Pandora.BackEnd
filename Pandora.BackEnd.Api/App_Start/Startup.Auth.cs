@@ -5,6 +5,7 @@ using Microsoft.Owin.Security.DataHandler.Encoder;
 using Microsoft.Owin.Security.Jwt;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
+using Pandora.BackEnd.Business;
 using Pandora.BackEnd.Bussines.Providers;
 using Pandora.BackEnd.Data.AccountManager;
 using Pandora.BackEnd.Data.Concrets;
@@ -21,9 +22,10 @@ namespace Pandora.BackEnd.Api
         // For more information on configuring authentication, please visit https://go.microsoft.com/fwlink/?LinkId=301864
         public void ConfigureAuth(IAppBuilder app)
         {
-            httpConfig = new HttpConfiguration();
+            // Set AutoMapper Mapping
+            AutoMapperConfig.Register();
 
-            app.UseCors(CorsOptions.AllowAll);
+            httpConfig = new HttpConfiguration();
 
             ConfigureOAuthTokenGeneration(app);
 
@@ -33,9 +35,11 @@ namespace Pandora.BackEnd.Api
 
             WebApiConfig.Register(httpConfig);
 
+            app.UseCors(CorsOptions.AllowAll);
+
             app.UseWebApi(httpConfig);
 
-            app.MapSignalR();
+            app.MapSignalR();           
         }
 
 
@@ -43,8 +47,8 @@ namespace Pandora.BackEnd.Api
         {
             // Configure the db context and user manager to use a single instance per request
             app.CreatePerOwinContext(ApplicationDbContext.Create);
-            app.CreatePerOwinContext<ApplicationRoleManager>(ApplicationRoleManager.Create);
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
+            app.CreatePerOwinContext<ApplicationRoleManager>(ApplicationRoleManager.Create);
 
 
             // Enable the application to use a cookie to store information for the signed in user
