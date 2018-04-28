@@ -103,6 +103,7 @@
     <Reference Include="System.Net.Http.WebRequest" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\EmployeeControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -116,10 +117,16 @@
       <Project>{146B723E-4280-434B-82B2-F9BB29089CD6}</Project>
       <Name>Pandora.BackEnd.Api</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Pandora.BackEnd.Business\Pandora.BackEnd.Business.csproj">
+      <Project>{FC76754C-4433-462C-98D5-8159B28A72A1}</Project>
+      <Name>Pandora.BackEnd.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Pandora.BackEnd.Reports\Pandora.BackEnd.Reports.csproj">
+      <Project>{03D9144D-2D0A-4C39-B6C8-EBD7CA108E64}</Project>
+      <Name>Pandora.BackEnd.Reports</Name>
+    </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
