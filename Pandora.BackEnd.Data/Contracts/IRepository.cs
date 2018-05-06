@@ -17,7 +17,7 @@ namespace Pandora.BackEnd.Data.Contracts
         Task<IQueryable<TEntity>> AllAsync(Expression<Func<TEntity, bool>> predicate, Func<IQueryable<TEntity>,
             IOrderedQueryable<TEntity>> orderBy, params Expression<Func<TEntity, object>>[] includes);
 
-        Task<TEntity> GetByIDAsync(object id);
+        Task<TEntity> GetByIdAsync(object id);
 
         Task<TEntity> FindAsync(Expression<Func<TEntity, bool>> predicate,
             params Expression<Func<TEntity, object>>[] includes);

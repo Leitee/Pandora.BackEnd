@@ -15,5 +15,12 @@ namespace Pandora.BackEnd.Business.Concrets
             if (pEx.InnerException != null)
                 pResponse.Errors.Add(pEx.InnerException.Message);
         }
+
+        protected void HandleSVCException<T>(ref BLResponse<T> pResponse, params string[] pErrors)
+        {
+            pResponse.HasErrors = true;
+            pResponse.Errors.Add("Error at Business Service");
+            pResponse.Errors.AddRange(pErrors);            
+        }
     }
 }

@@ -26,16 +26,16 @@ namespace Pandora.BackEnd.Data.AccountManager
             return roleManager.RoleExists(name);
         }
 
-        public static bool CreateRole(ApplicationRoleManager _roleManager, string name, string description = "")
+        public static bool CreateRole(ApplicationRoleManager roleManager, string name, string description = "")
         {
-            var idResult = _roleManager.Create<AppRole, string>(new AppRole(name, description));
+            var idResult = roleManager.Create(new AppRole(name, description));
             return idResult.Succeeded;
         }
 
 
-        public static bool AddUserToRole(ApplicationUserManager _userManager, string userId, string roleName)
+        public static bool AddUserToRole(ApplicationUserManager userManager, string userId, string roleName)
         {
-            var idResult = _userManager.AddToRole(userId, roleName);
+            var idResult = userManager.AddToRole(userId, roleName);
             return idResult.Succeeded;
         }
 

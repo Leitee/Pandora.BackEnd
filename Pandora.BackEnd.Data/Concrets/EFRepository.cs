@@ -76,7 +76,7 @@ namespace Pandora.BackEnd.Data.Concrets
             });
         }
 
-        public async Task<TEntity> GetByIDAsync(object id)
+        public async Task<TEntity> GetByIdAsync(object id)
         {
             return await Task.Run(() =>
             {

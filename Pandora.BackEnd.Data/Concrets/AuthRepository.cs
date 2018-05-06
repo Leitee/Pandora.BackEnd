@@ -18,10 +18,9 @@ namespace Pandora.BackEnd.Data.Concrets
 
         private readonly ApplicationUserManager _userManager;
 
-        public AuthRepository(IApplicationDbContext dbContext)
-            : base(dbContext)
+        public AuthRepository(IApplicationDbContext dbContext) : base(dbContext)
         {
-            this._currentContext = dbContext;
+            _currentContext = dbContext;
             _userManager = new ApplicationUserManager(new UserStore<AppUser>(dbContext as ApplicationDbContext));
         }
 
@@ -343,12 +342,25 @@ namespace Pandora.BackEnd.Data.Concrets
             return response;
         }
 
-        public Task SendEmailAsync(string userId, string subject, string body)
+        public async Task SendEmailAsync(string userId, string subject, string body)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var msg = new IdentityMessage
+                {
+                    Body = body,
+                    Subject = subject
+                };
+                await _userManager.EmailService.SendAsync(msg);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message, ex.InnerException);
+            }
         }
 
-        public async Task<AppUser> FindByNameAsync(string userName)
+        public async Task<AppUser> FindUserAsync(string userName)
         {
             AppUser user;
 

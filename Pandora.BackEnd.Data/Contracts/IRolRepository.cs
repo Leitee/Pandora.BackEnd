@@ -5,18 +5,18 @@ using System.Threading.Tasks;
 
 namespace Pandora.BackEnd.Data.Contracts
 {
-    public interface IRolRepository : IRepository<AppRole>
+    public interface IRolRepository
     {
         Task<List<AppRole>> GeAllRolesAsync();
 
-        Task<AppRole> GetRoleById(string roleId);
+        Task<AppRole> GetRoleByIdAsync(string roleId);
 
         Task<IdentityResult> CreateRoleAsync(AppRole role);
 
-        Task<IdentityResult> EditRoleAsync(AppRole role);
+        Task<IdentityResult> UpdateRoleAsync(AppRole role);
 
         Task<IdentityResult> DeleteRoleAsync(string roleId);
 
-        Task<AppRole> GetRoleByName(string roleName);
+        Task<AppRole> GetRoleByNameAsync(string roleName);
     }
 }

@@ -109,11 +109,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLResponse.cs" />
+    <Compile Include="Concrets\AccountSVC.cs" />
     <Compile Include="Concrets\EmployeeSVC.cs" />
     <Compile Include="Concrets\ServicesBase.cs" />
     <Compile Include="Config\AccountManagerConfig.cs" />
     <Compile Include="Config\BusinessMapperProfile.cs" />
+    <Compile Include="Contracts\IAccountSVC.cs" />
+    <Compile Include="Contracts\ICrudOperations.cs" />
     <Compile Include="Contracts\IEmployeeSVC.cs" />
+    <Compile Include="DTO\AppRoleDTO.cs" />
+    <Compile Include="DTO\AppUserDTO.cs" />
     <Compile Include="DTO\EmployeeDTO.cs" />
     <Compile Include="Filters\.PagedFilter.cs" />
     <Compile Include="Filters\EmployeeFilter.cs" />

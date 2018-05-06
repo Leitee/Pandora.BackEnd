@@ -5,11 +5,13 @@ using System.Threading.Tasks;
 
 namespace Pandora.BackEnd.Data.Contracts
 {
-    public interface IAuthRepository : IRepository<AppUser>
+    public interface IAuthRepository
     {
         Task<List<AppUser>> GeAllUsersAsync();
 
         Task<AppUser> FindUserBydIdAsync(string userId);
+
+        Task<AppUser> FindUserAsync(string userName);
 
         Task<AppUser> FindUserAsync(string userName, string password);
 
@@ -40,8 +42,6 @@ namespace Pandora.BackEnd.Data.Contracts
         Task<IdentityResult> ConfirmEmailAsync(string userId, string code);
 
         Task<bool> IsEmailConfirmedAsync(string userId);
-
-        Task<AppUser> FindByNameAsync(string userName);
 
         Task<bool> ChangePassword(string userName, string oldPassword, string newPassword);
     }

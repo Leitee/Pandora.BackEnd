@@ -1,4 +1,5 @@
 ﻿using Pandora.BackEnd.Data.Concrets;
+using Pandora.BackEnd.Data.Contracts;
 using System;
 using System.Collections.Generic;
 
@@ -21,46 +22,41 @@ namespace Pandora.BackEnd.Data.Helpers
     public class RepositoryFactories
     {
         /// <summary>
+        /// Get the dictionary of repository factory functions.
+        /// </summary>
+        /// <remarks>
+        /// A dictionary key is a System.Type, typically a repository type.
+        /// A value is a repository factory function
+        /// that takes a <see cref="DbContext"/> argument and returns
+        /// a repository object. Caller must know how to cast it.
+        /// </remarks>
+        private readonly IDictionary<Type, Func<ApplicationDbContext, object>> _repositoryFactories;
+
+        /// <summary>
+        /// Constructor that initializes with runtime default repository factories
+        /// </summary>
+        public RepositoryFactories()
+        {
+            _repositoryFactories = GetDefaultFactories();
+        }
+
+
+        /// <summary>
         /// Return the runtime Code Camper repository factory functions,
         /// each one is a factory for a repository of a particular type.
         /// </summary>
         /// <remarks>
         /// MODIFY THIS METHOD TO ADD CUSTOM CODE CAMPER FACTORY FUNCTIONS
         /// </remarks>
-        private IDictionary<Type, Func<ApplicationDbContext, object>> GetCodeCamperFactories()
+        private IDictionary<Type, Func<ApplicationDbContext, object>> GetDefaultFactories()
         {
             return new Dictionary<Type, Func<ApplicationDbContext, object>>
             {
-               //{typeof(IValeRepository), _dbContext => new ValeRepository(_dbContext)},
-                //{typeof(IPersonsRepository), _dbContext => new PersonsRepository(_dbContext)},
-                //{typeof(ISessionsRepository), _dbContext => new SessionsRepository(_dbContext)},
+               {typeof(IRolRepository), _dbContext => new RolRepository(_dbContext)},
+               {typeof(IAuthRepository), _dbContext => new AuthRepository(_dbContext)}
             };
         }
-
-        /// <summary>
-        /// Constructor that initializes with runtime Code Camper repository factories
-        /// </summary>
-        public RepositoryFactories()
-        {
-            _repositoryFactories = GetCodeCamperFactories();
-        }
-
-        /// <summary>
-        /// Constructor that initializes with an arbitrary collection of factories
-        /// </summary>
-        /// <param name="factories">
-        /// The repository factory functions for this instance. 
-        /// </param>
-        /// <remarks>
-        /// This ctor is primarily useful for testing this class
-        /// </remarks>
-        /// 
-
-        //public RepositoryFactories(IDictionary<Type, Func<ATPSistemaDbContext, object>> factories)
-        //{
-        //    _repositoryFactories = factories;
-        //}
-
+        
         /// <summary>
         /// Get the repository factory function for the type.
         /// </summary>
@@ -72,9 +68,7 @@ namespace Pandora.BackEnd.Data.Helpers
         /// </remarks>
         public Func<ApplicationDbContext, object> GetRepositoryFactory<T>()
         {
-
-            Func<ApplicationDbContext, object> factory;
-            _repositoryFactories.TryGetValue(typeof(T), out factory);
+            _repositoryFactories.TryGetValue(typeof(T), out Func<ApplicationDbContext, object> factory);
             return factory;
         }
 
@@ -105,16 +99,6 @@ namespace Pandora.BackEnd.Data.Helpers
             return dbContext => new EFRepository<T>(dbContext);
         }
 
-        /// <summary>
-        /// Get the dictionary of repository factory functions.
-        /// </summary>
-        /// <remarks>
-        /// A dictionary key is a System.Type, typically a repository type.
-        /// A value is a repository factory function
-        /// that takes a <see cref="DbContext"/> argument and returns
-        /// a repository object. Caller must know how to cast it.
-        /// </remarks>
-        private readonly IDictionary<Type, Func<ApplicationDbContext, object>> _repositoryFactories;
 
     }
 }

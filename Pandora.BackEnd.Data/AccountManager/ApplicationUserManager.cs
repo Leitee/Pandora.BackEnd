@@ -21,7 +21,7 @@ namespace Pandora.BackEnd.Data.AccountManager
             var appUserManager = new ApplicationUserManager(new UserStore<AppUser>(appDbContext));
 
             // Configure validation logic for usernames
-            appUserManager.UserValidator = new CustomUserValidator<AppUser>(Helpers.ContextHelper.GetUserManager(appDbContext))
+            appUserManager.UserValidator = new CustomUserValidator<AppUser>(appUserManager)
             {
                 AllowOnlyAlphanumericUserNames = false,
                 RequireUniqueEmail = true
@@ -40,7 +40,7 @@ namespace Pandora.BackEnd.Data.AccountManager
             // Configure user lockout defaults
             appUserManager.UserLockoutEnabledByDefault = true;
             appUserManager.DefaultAccountLockoutTimeSpan = TimeSpan.FromMinutes(5);
-            appUserManager.MaxFailedAccessAttemptsBeforeLockout = 5;
+            appUserManager.MaxFailedAccessAttemptsBeforeLockout = 3;
 
             // Register two factor authentication providers. This application uses Phone and Emails as a step of receiving a code for verifying the user
             // You can write your own provider and plug it in here.

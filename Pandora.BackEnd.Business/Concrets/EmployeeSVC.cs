@@ -18,12 +18,12 @@ namespace Pandora.BackEnd.Business.Concrets
             Uow = pUow;
         }
 
-        public Task<BLResponse<object>> CreateAsync(EmployeeDTO pEmpDto)
+        public Task<BLResponse<EmployeeDTO>> CreateAsync(EmployeeDTO pEmpDto)
         {
             throw new NotImplementedException();
         }
 
-        public Task<BLResponse<bool>> DeleteAsync(int pId)
+        public Task<BLResponse<bool>> DeleteAsync(EmployeeDTO pDto)
         {
             throw new NotImplementedException();
         }

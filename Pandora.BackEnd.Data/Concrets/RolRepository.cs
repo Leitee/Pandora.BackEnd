@@ -10,19 +10,13 @@ using System.Threading.Tasks;
 
 namespace Pandora.BackEnd.Data.Concrets
 {
-    public class RolRepository : EFRepository<AppRole>, IRolRepository
+    public class RolRepository : IRolRepository
     {
-        private readonly IApplicationDbContext _context;
-
-        private readonly RoleStore<AppRole> _roleStore;
         private readonly ApplicationRoleManager _roleManager;
 
         public RolRepository(IApplicationDbContext context)
-            : base(context)
         {
-            _context = context;
-            this._roleStore = new RoleStore<AppRole>(_context as ApplicationDbContext);
-            this._roleManager = new ApplicationRoleManager(this._roleStore);
+            _roleManager = new ApplicationRoleManager(new RoleStore<AppRole>(context as ApplicationDbContext));
         }
 
         public async Task<List<AppRole>> GeAllRolesAsync()
@@ -32,7 +26,7 @@ namespace Pandora.BackEnd.Data.Concrets
             });
         }
 
-        public async Task<AppRole> GetRoleById(string roleId)
+        public async Task<AppRole> GetRoleByIdAsync(string roleId)
         {
             try
             {
@@ -60,13 +54,13 @@ namespace Pandora.BackEnd.Data.Concrets
             return response;
         }
 
-        public async Task<IdentityResult> EditRoleAsync(AppRole role)
+        public async Task<IdentityResult> UpdateRoleAsync(AppRole role)
         {
             var response = new IdentityResult();
 
             try
             {
-                var rol = await this.GetRoleById(role.Id);
+                var rol = await this.GetRoleByIdAsync(role.Id);
                 rol.Name = role.Name;
                 rol.Description = role.Description;
 
@@ -86,7 +80,7 @@ namespace Pandora.BackEnd.Data.Concrets
 
             try
             {
-                response = await this._roleManager.DeleteAsync(await this.GetRoleById(roleId));
+                response = await this._roleManager.DeleteAsync(await this.GetRoleByIdAsync(roleId));
             }
             catch (Exception ex)
             {
@@ -96,7 +90,7 @@ namespace Pandora.BackEnd.Data.Concrets
             return response;
         }
 
-        public async Task<AppRole> GetRoleByName(string roleName)
+        public async Task<AppRole> GetRoleByNameAsync(string roleName)
         {
             try
             {

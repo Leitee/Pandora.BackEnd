@@ -24,31 +24,16 @@ namespace Pandora.BackEnd.Bussines.Providers
             var allowedOrigin = "*";
             context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { allowedOrigin });
             
-            var userManager = context.OwinContext.GetUserManager<ApplicationUserManager>();
-            AppUser user = await userManager.FindAsync(context.UserName, context.Password);            
+            var signManager = context.OwinContext.Get<ApplicationSignInManager>();
 
-            if (! await userManager.CheckPasswordAsync(user, context.Password))
+            if (await signManager.TrySignIn(context) != SignInStatus.Success)
             {
-                context.SetError("invalid_grant", "The user name or password is incorrect.");
                 context.Rejected();
                 return;
             }
-
-            if (! await userManager.IsEmailConfirmedAsync(user.Id))
-            {
-                context.SetError("invalid_grant", "User did not confirm email.");
-                context.Rejected();
-                return;
-            }
-
-            if (await userManager.IsLockedOutAsync(user.Id))
-            {
-                context.SetError("invalid_grant", "This User is currently locked out.");
-                context.Rejected();
-                return;
-            }
-
-            ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(userManager);
+            
+            AppUser user = await signManager.UserManager.FindAsync(context.UserName, context.Password);
+            ClaimsIdentity oAuthIdentity = await signManager.CreateUserIdentityAsync(user);
             oAuthIdentity.AddClaims(ExtendedClaimsProvider.GetClaims(user));
             oAuthIdentity.AddClaims(ExtendedClaimsProvider.CreateRolesBasedOnClaims(oAuthIdentity));
 

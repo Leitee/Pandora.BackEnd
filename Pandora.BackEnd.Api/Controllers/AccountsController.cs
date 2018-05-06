@@ -1,23 +1,25 @@
-﻿using System.Web.Http;
+﻿using Pandora.BackEnd.Business.Contracts;
+using Pandora.BackEnd.Business.DTO;
+using System.Threading.Tasks;
+using System.Web.Http;
 
 namespace Pandora.BackEnd.Api.Controllers
 {
-    [RoutePrefix("api/accounts")]
-    public class AccountsController : BaseApiController
+    [Authorize(Roles = "Admin")]
+    [RoutePrefix("api/account")]
+    public class AccountController : BaseApiController
     {
-
-        public AccountsController()
+        public AccountController(IAccountSVC accountSVC)
         {
-            
+            AccountManager = accountSVC;
         }
 
-        //[Authorize(Roles = "Admin")]
-        [Route("users")]
-        public IHttpActionResult GetUsers()
+        public async Task<IHttpActionResult> GetUsersAsync()
         {
             //Only SuperAdmin or Admin can delete users (Later when implement roles)
             var identity = User.Identity as System.Security.Claims.ClaimsIdentity;
-            return Ok();
+            var a = await AccountManager.GetAllRolesAsync();
+            return Ok(a);
         }
 
 /*
